@@ -17,7 +17,10 @@ public class CalculatorVisitor implements Calculator, Visitor
      private void performOperation(Operation operation)
      {
           if (tokenStack.isEmpty())
+          {
+               malformed = true;
                return;
+          }
 
           var right = popOperand();
           var left = popOperand();
@@ -64,10 +67,13 @@ public class CalculatorVisitor implements Calculator, Visitor
      public int getResult() throws MalformedExpressionException
      {
           if (malformed) {
+               malformed = false;
                throw new MalformedExpressionException();
           }
           else {
-               return popOperand();
+               var top = popOperand();
+               malformed = false;
+               return top;
           }
      }
 
