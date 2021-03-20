@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Operand extends Token
 {
      private int value;
