@@ -1,68 +1,70 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListTest
 {
+	private LinkedList<String> linkedList;
+	private String first= "a";
+	private String second = "b";
+	private String third = "c";
+
+	@BeforeEach
+	public void setUp()
+	{
+		linkedList = new LinkedList<>();
+	}
+
 	@Test
 	public void sizeIsZeroWhenContainsZeroElements()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
 		assertEquals(0, linkedList.size());
 	}
 
 	@Test
 	public void sizeIsOneUponAddingOneElementToFront()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		linkedList.addToFront(new Operand(5));
+		linkedList.addToFront(first);
 		assertEquals(1, linkedList.size());
 	}
 
 	@Test
 	public void sizeIsManyUponAddingManyElementsToFront()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		linkedList.addToFront(new Operand(5));
-		linkedList.addToFront(new Operand(5));
-		linkedList.addToFront(new Operand(5));
-		linkedList.addToFront(new Operand(5));
-		linkedList.addToFront(new Operand(5));
+		for (int i = 0; i < 5 ; i++)
+		{
+			linkedList.addToFront(first);
+		}
 		assertEquals(5, linkedList.size());
 	}
 
 	@Test
 	public void isEmptyWhenContainsZeroElements()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
 		assertTrue(linkedList.isEmpty());
 	}
 
 	@Test
 	public void isEmptyWhenContainsOneElement()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		linkedList.addToFront(new Operand(5));
+		linkedList.addToFront(first);
 		assertFalse(linkedList.isEmpty());
 	}
 
 	@Test
 	public void isEmptyWhenContainsManyElements()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		linkedList.addToFront(new Operand(5));
-		linkedList.addToFront(new Operand(8));
-		linkedList.addToFront(new Operator(Operation.ADDITION));
+		for (int i = 0; i < 5 ; i++)
+		{
+			linkedList.addToFront(first);
+		}
 		assertFalse(linkedList.isEmpty());
 	}
 
 	@Test
 	public void removeFirstReturnsFirstElementInList() throws EmptyListException
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		Operand first= new Operand(5);
-		Operand second = new Operand(10);
-		Operand third = new Operand(15);
 		linkedList.addToFront(third);
 		linkedList.addToFront(second);
 		linkedList.addToFront(first);
@@ -72,10 +74,6 @@ public class LinkedListTest
 	@Test
 	public void removeFirstRemovesFirstElementAndMovesSecondElementToFirstPosition() throws EmptyListException
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
-		Operand first= new Operand(5);
-		Operand second = new Operand(10);
-		Operand third = new Operand(15);
 		linkedList.addToFront(third);
 		linkedList.addToFront(second);
 		linkedList.addToFront(first);
@@ -84,9 +82,8 @@ public class LinkedListTest
 	}
 
 	@Test
-	public void removeFirstThrowsExceptionWhenLinkedListIsEmpty() throws EmptyListException
+	public void removeFirstThrowsExceptionWhenLinkedListIsEmpty()
 	{
-		LinkedList<Token> linkedList = new LinkedList<>();
 		assertThrows(EmptyListException.class, () -> linkedList.removeFirst());
 	}
 }
