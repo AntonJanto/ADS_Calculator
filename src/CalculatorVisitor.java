@@ -49,9 +49,12 @@ public class CalculatorVisitor implements Calculator, Visitor
 
      private int popOperand()
      {
-          var top = tokenStack.pop();
-          if (top instanceof Operand) {
-               return ((Operand) top).getValue();
+          if (!tokenStack.isEmpty())
+          {
+               var top = tokenStack.pop();
+               if (top instanceof Operand) {
+                    return ((Operand) top).getValue();
+               }
           }
           malformed = true;
           return 0;

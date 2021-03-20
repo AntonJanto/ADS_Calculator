@@ -22,7 +22,7 @@ public class Client
           }
           catch (MalformedExpressionException e) {
                System.out.println(e.getMessage());
-               return -1;
+               return 0;
           }
      }
 }
